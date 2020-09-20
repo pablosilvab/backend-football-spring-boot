@@ -18,7 +18,6 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public List<Player> getTopScorers(String team) {
         List<Player> topScorers = playerRepository.findByTeam(team, Sort.by("goals").descending());
-        // Sort.by("goals").descending()
         return topScorers;
     }
     

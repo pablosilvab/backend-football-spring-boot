@@ -9,26 +9,26 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="match")
+@Document(collection = "match")
 public class Match {
     @Id
     private String id;
-    private String teamLocal;
+    private Team teamLocal;
     private int goalsLocal;
     private List<String> scorersLocal;
-    private String teamVisit;
+    private Team teamVisit;
     private int goalsVisit;
     private List<String> scorersVisit;
-    private String tournament;
-    @JsonFormat(pattern="yyyy/MM/dd")
+    private Tournament tournament;
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private Date date;
     private String stadium;
-
 
     public Match() {
     }
 
-    public Match(String id, String teamLocal, int goalsLocal, List<String> scorersLocal, String teamVisit, int goalsVisit, List<String> scorersVisit, String tournament, Date date, String stadium) {
+    public Match(String id, Team teamLocal, int goalsLocal, List<String> scorersLocal, Team teamVisit, int goalsVisit,
+            List<String> scorersVisit, Tournament tournament, Date date, String stadium) {
         this.id = id;
         this.teamLocal = teamLocal;
         this.goalsLocal = goalsLocal;
@@ -49,11 +49,11 @@ public class Match {
         this.id = id;
     }
 
-    public String getTeamLocal() {
+    public Team getTeamLocal() {
         return this.teamLocal;
     }
 
-    public void setTeamLocal(String teamLocal) {
+    public void setTeamLocal(Team teamLocal) {
         this.teamLocal = teamLocal;
     }
 
@@ -73,11 +73,11 @@ public class Match {
         this.scorersLocal = scorersLocal;
     }
 
-    public String getTeamVisit() {
+    public Team getTeamVisit() {
         return this.teamVisit;
     }
 
-    public void setTeamVisit(String teamVisit) {
+    public void setTeamVisit(Team teamVisit) {
         this.teamVisit = teamVisit;
     }
 
@@ -97,11 +97,11 @@ public class Match {
         this.scorersVisit = scorersVisit;
     }
 
-    public String getTournament() {
+    public Tournament getTournament() {
         return this.tournament;
     }
 
-    public void setTournament(String tournament) {
+    public void setTournament(Tournament tournament) {
         this.tournament = tournament;
     }
 
@@ -126,7 +126,7 @@ public class Match {
         return this;
     }
 
-    public Match teamLocal(String teamLocal) {
+    public Match teamLocal(Team teamLocal) {
         this.teamLocal = teamLocal;
         return this;
     }
@@ -141,7 +141,7 @@ public class Match {
         return this;
     }
 
-    public Match teamVisit(String teamVisit) {
+    public Match teamVisit(Team teamVisit) {
         this.teamVisit = teamVisit;
         return this;
     }
@@ -156,7 +156,7 @@ public class Match {
         return this;
     }
 
-    public Match tournament(String tournament) {
+    public Match tournament(Tournament tournament) {
         this.tournament = tournament;
         return this;
     }
@@ -179,29 +179,26 @@ public class Match {
             return false;
         }
         Match match = (Match) o;
-        return Objects.equals(id, match.id) && Objects.equals(teamLocal, match.teamLocal) && goalsLocal == match.goalsLocal && Objects.equals(scorersLocal, match.scorersLocal) && Objects.equals(teamVisit, match.teamVisit) && goalsVisit == match.goalsVisit && Objects.equals(scorersVisit, match.scorersVisit) && Objects.equals(tournament, match.tournament) && Objects.equals(date, match.date) && Objects.equals(stadium, match.stadium);
+        return Objects.equals(id, match.id) && Objects.equals(teamLocal, match.teamLocal)
+                && goalsLocal == match.goalsLocal && Objects.equals(scorersLocal, match.scorersLocal)
+                && Objects.equals(teamVisit, match.teamVisit) && goalsVisit == match.goalsVisit
+                && Objects.equals(scorersVisit, match.scorersVisit) && Objects.equals(tournament, match.tournament)
+                && Objects.equals(date, match.date) && Objects.equals(stadium, match.stadium);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, teamLocal, goalsLocal, scorersLocal, teamVisit, goalsVisit, scorersVisit, tournament, date, stadium);
+        return Objects.hash(id, teamLocal, goalsLocal, scorersLocal, teamVisit, goalsVisit, scorersVisit, tournament,
+                date, stadium);
     }
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", teamLocal='" + getTeamLocal() + "'" +
-            ", goalsLocal='" + getGoalsLocal() + "'" +
-            ", scorersLocal='" + getScorersLocal() + "'" +
-            ", teamVisit='" + getTeamVisit() + "'" +
-            ", goalsVisit='" + getGoalsVisit() + "'" +
-            ", scorersVisit='" + getScorersVisit() + "'" +
-            ", tournament='" + getTournament() + "'" +
-            ", date='" + getDate() + "'" +
-            ", stadium='" + getStadium() + "'" +
-            "}";
+        return "{" + " id='" + getId() + "'" + ", teamLocal='" + getTeamLocal() + "'" + ", goalsLocal='"
+                + getGoalsLocal() + "'" + ", scorersLocal='" + getScorersLocal() + "'" + ", teamVisit='"
+                + getTeamVisit() + "'" + ", goalsVisit='" + getGoalsVisit() + "'" + ", scorersVisit='"
+                + getScorersVisit() + "'" + ", tournament='" + getTournament() + "'" + ", date='" + getDate() + "'"
+                + ", stadium='" + getStadium() + "'" + "}";
     }
-  
 
 }
