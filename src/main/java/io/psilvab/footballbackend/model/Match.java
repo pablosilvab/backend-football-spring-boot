@@ -1,7 +1,10 @@
 package io.psilvab.footballbackend.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,12 +20,15 @@ public class Match {
     private int goalsVisit;
     private List<String> scorersVisit;
     private String tournament;
+    @JsonFormat(pattern="yyyy/MM/dd")
+    private Date date;
+    private String stadium;
 
 
     public Match() {
     }
 
-    public Match(String id, String teamLocal, int goalsLocal, List<String> scorersLocal, String teamVisit, int goalsVisit, List<String> scorersVisit, String tournament) {
+    public Match(String id, String teamLocal, int goalsLocal, List<String> scorersLocal, String teamVisit, int goalsVisit, List<String> scorersVisit, String tournament, Date date, String stadium) {
         this.id = id;
         this.teamLocal = teamLocal;
         this.goalsLocal = goalsLocal;
@@ -31,6 +37,8 @@ public class Match {
         this.goalsVisit = goalsVisit;
         this.scorersVisit = scorersVisit;
         this.tournament = tournament;
+        this.date = date;
+        this.stadium = stadium;
     }
 
     public String getId() {
@@ -97,6 +105,22 @@ public class Match {
         this.tournament = tournament;
     }
 
+    public Date getDate() {
+        return this.date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getStadium() {
+        return this.stadium;
+    }
+
+    public void setStadium(String stadium) {
+        this.stadium = stadium;
+    }
+
     public Match id(String id) {
         this.id = id;
         return this;
@@ -137,6 +161,16 @@ public class Match {
         return this;
     }
 
+    public Match date(Date date) {
+        this.date = date;
+        return this;
+    }
+
+    public Match stadium(String stadium) {
+        this.stadium = stadium;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -145,12 +179,12 @@ public class Match {
             return false;
         }
         Match match = (Match) o;
-        return Objects.equals(id, match.id) && Objects.equals(teamLocal, match.teamLocal) && goalsLocal == match.goalsLocal && Objects.equals(scorersLocal, match.scorersLocal) && Objects.equals(teamVisit, match.teamVisit) && goalsVisit == match.goalsVisit && Objects.equals(scorersVisit, match.scorersVisit) && Objects.equals(tournament, match.tournament);
+        return Objects.equals(id, match.id) && Objects.equals(teamLocal, match.teamLocal) && goalsLocal == match.goalsLocal && Objects.equals(scorersLocal, match.scorersLocal) && Objects.equals(teamVisit, match.teamVisit) && goalsVisit == match.goalsVisit && Objects.equals(scorersVisit, match.scorersVisit) && Objects.equals(tournament, match.tournament) && Objects.equals(date, match.date) && Objects.equals(stadium, match.stadium);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, teamLocal, goalsLocal, scorersLocal, teamVisit, goalsVisit, scorersVisit, tournament);
+        return Objects.hash(id, teamLocal, goalsLocal, scorersLocal, teamVisit, goalsVisit, scorersVisit, tournament, date, stadium);
     }
 
     @Override
@@ -164,9 +198,10 @@ public class Match {
             ", goalsVisit='" + getGoalsVisit() + "'" +
             ", scorersVisit='" + getScorersVisit() + "'" +
             ", tournament='" + getTournament() + "'" +
+            ", date='" + getDate() + "'" +
+            ", stadium='" + getStadium() + "'" +
             "}";
     }
-    
-   
+  
 
 }
