@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import io.psilvab.footballbackend.repository.MatchRepository;
 import io.psilvab.footballbackend.services.MatchService;
 import io.psilvab.footballbackend.services.TournamentService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class MatchController {
@@ -60,6 +62,16 @@ public class MatchController {
         try {
             Match match = matchService.getMatch(idMatch);
             return new ResponseEntity<>(match, HttpStatus.OK);
+        } catch (final Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/matches")
+    public ResponseEntity<List<Match>> getAllMatches() {
+        try {
+            List<Match> matches = matchRepository.findAll();
+            return new ResponseEntity<>(matches, HttpStatus.OK);
         } catch (final Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

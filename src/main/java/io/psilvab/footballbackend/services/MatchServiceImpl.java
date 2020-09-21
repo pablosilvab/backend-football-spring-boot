@@ -35,11 +35,6 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public Match saveMatch(final Match match) {
 
-        // Optional<Team> teamLocal =
-        // teamRepository.findById(match.getTeamLocal().getId());
-        // Optional<Team> teamVisit =
-        // teamRepository.findById(match.getTeamVisit().getId());
-
         final List<String> playersLocal = match.getScorersLocal();
         saveMatchGoals(playersLocal, match.getTeamLocal().getName());
 
